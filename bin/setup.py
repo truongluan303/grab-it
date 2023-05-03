@@ -28,7 +28,9 @@ def create_venv() -> None:
         return
     # Make sure venv is available
     try:
-        subprocess.run("python3.8 -m venv -h".split(), check=True, stdout=subprocess.PIPE)
+        subprocess.run(
+            "python3.8 -m venv -h".split(), check=True, stdout=subprocess.PIPE
+        )
     except subprocess.CalledProcessError:
         print(
             "Error: ensurepip is not available. "
