@@ -5,6 +5,7 @@ import logging
 from dataclasses import asdict
 from dataclasses import dataclass
 from typing import Any
+from uuid import uuid4
 
 import yt_dlp as youtube_dl
 
@@ -80,8 +81,10 @@ class DownloadResult:
 
 
 def download_youtube(url: str) -> DownloadResult | None:
+    unique_id = str(uuid4())
+
     options = {
-        "outtmpl": f"{tempdir.name}/%(id)s.%(ext)s",
+        "outtmpl": f"{tempdir.name}/{unique_id}.%(ext)s",
         "logger": YDLLogger(),
         "progress_hooks": [progress_hook],
     }
@@ -92,10 +95,8 @@ def download_youtube(url: str) -> DownloadResult | None:
         except youtube_dl.utils.DownloadError:
             return None
 
-        video_id = metadata["id"]
-        video_ext = metadata["ext"]
         return DownloadResult(
-            file_id=video_id,
-            file_path=f"{tempdir.name}/{video_id}.{video_ext}",
+            file_id=unique_id,
+            file_path=f"{tempdir.name}/{unique_id}.{metadata['ext']}",
             video_data=YoutubeVideoData.from_dict(**metadata),
         )
