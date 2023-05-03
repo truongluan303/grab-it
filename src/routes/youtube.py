@@ -46,7 +46,7 @@ def youtube() -> Response:
 
     return jsonify(
         {
-            "file_download_url": download_result.file_id,
+            "download_file_id": download_result.file_id,
             **download_result.video_data.to_dict(),
         }
     )
