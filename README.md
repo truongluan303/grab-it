@@ -3,7 +3,7 @@ A REST API to download Youtube videos.
 
 ## Example Usage
 
-In order to download a Youtube video using 2 separate GET requests.
+Download a Youtube video using 2 separate GET requests:
 
 You can send the first `GET` request to `https://grab-it.onrender.com/youtube?url=<youtube-video-url>` where `<youtube-video-url>` is the URL to the Youtube video you want to download.
 Since the server will retrieve the video when it receives the request, it can take a while depending on the size of the video.
@@ -42,3 +42,8 @@ endpoint = "https://grab-it.onrender.com/download/" + download_file_id
 
 wget.download(endpoint, "C:/Users/hoang/Downloads/my_video.webm")
 ```
+
+## Dev Setup
+
+Required `Python3.7` or higher, along with `venv` and `pip` installed.
+You can automate the setup process by running the setup script: `python3 bin/setup.py`
